@@ -20,6 +20,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+function tsvJSON(tsv) {
+    const lines = tsv.split('\n');
+    const headers = lines.shift().split('\t');
+    console.log(headers);
+    return lines.map(line => {
+      const data = line.split('\t');
+      return headers.reduce((obj, nextKey, index) => {
+        console.log(nextKey, index);
+        obj[nextKey] = data[index];
+
+        console.log(obj);
+        return obj;
+      }, {});
+    });
+  }
+
+function isEntryNull(entry) {
+  console.log("entry", entry, entry["quadrant"]);
+  if(entry["ring"] || entry["ring"] == '') {
+    return true;
+  }
+}
+
+function name_to_position(quadrantList, quadrantName) {
+  let p = 0;
+  quadrantList.forEach(q => {
+    if(q.name == quadrantName) {
+        p = q.position;
+    }
+  });
+  return p;
+}
+
 
 function radar_visualization(config) {
 
